@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Size Chart - Standard Sizing Guide</title>
+  <style>
+    :root {
+      --primary-color: #1e293b;
+      --accent-color: #2563eb;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #334155;
+      --border-color: #cbd5e1;
+      --table-stripe: #f1f5f9;
+      --table-hover: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    /* Table Styling */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--table-stripe);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: var(--table-hover);
+    }
+
+    .notes-list {
+      padding-left: 1.25rem;
+      color: #64748b;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <header>
+      <h1>Apparel Size Chart</h1>
+      <p class="description">Use our comprehensive measurement guide to find your optimal fit.</p>
+    </header>
+
+    <section>
+      <h2>Standard Measurements (Inches)</h2>
+      <div class="table-responsive">
+        <table>
+          <caption>Table of standard clothing sizes with corresponding chest, waist, and hip measurements in inches.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Size</th>
+              <th scope="col">Chest / Bust</th>
+              <th scope="col">Waist</th>
+              <th scope="col">Hips</th>
+              <th scope="col">Fits US Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">XS</th>
+              <td>32 - 33"</td>
+              <td>24 - 25"</td>
+              <td>34 - 35"</td>
+              <td>0 - 2</td>
+            </tr>
+            <tr>
+              <th scope="row">S</th>
+              <td>34 - 35"</td>
+              <td>26 - 27"</td>
+              <td>36 - 37"</td>
+              <td>4 - 6</td>
+            </tr>
+            <tr>
+              <th scope="row">M</th>
+              <td>36 - 37"</td>
+              <td>28 - 29"</td>
+              <td>38 - 39"</td>
+              <td>8 - 10</td>
+            </tr>
+            <tr>
+              <th scope="row">L</th>
+              <td>38 - 40"</td>
+              <td>30 - 32"</td>
+              <td>40 - 42"</td>
+              <td>12 - 14</td>
+            </tr>
+            <tr>
+              <th scope="row">XL</th>
+              <td>41 - 43"</td>
+              <td>33 - 35"</td>
+              <td>43 - 45"</td>
+              <td>16 - 18</td>
+            </tr>
+            <tr>
+              <th scope="row">XXL</th>
+              <td>44 - 46"</td>
+              <td>36 - 38"</td>
+              <td>46 - 48"</td>
+              <td>20 - 22</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Measurement Tips</h2>
+      <ul class="notes-list">
+        <li><strong>Chest / Bust:</strong> Measure around the fullest part of the chest, keeping the tape horizontal.</li>
+        <li><strong>Waist:</strong> Measure around the narrowest part of the waistline (typically just above the belly button).</li>
+        <li><strong>Hips:</strong> Stand with feet together and measure around the fullest part of the hip/seat area.</li>
+        <li>If your measurements fall between two sizes, we recommend ordering the larger size for a more comfortable fit.</li>
+      </ul>
+    </section>
+  </main>
+
+</body>
+</html>

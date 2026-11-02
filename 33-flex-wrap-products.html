@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Flexbox Wrap Product Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --border: #334155;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- FLEXBOX WRAP PRODUCT GRID CONTAINER --- */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        /* Individual Product Card */
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 280px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .btn-buy {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>33. Flexbox Wrap Product Catalog</h1>
+            <p>Responsive product grid layout built using <code>display: flex</code> and <code>flex-wrap: wrap</code> properties.</p>
+        </header>
+
+        <!-- Product Grid Container -->
+        <div class="product-grid">
+
+            <!-- Item 1 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-img">🎧</div>
+                    <div class="product-category">Audio</div>
+                    <h3 class="product-title">Wireless Headphones</h3>
+                    <p class="product-desc">High-fidelity active noise-cancelling headphones with deep bass.</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">$149.99</span>
+                    <button class="btn-buy">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-img">⌚</div>
+                    <div class="product-category">Wearables</div>
+                    <h3 class="product-title">Smart Fitness Watch</h3>
+                    <p class="product-desc">Track your daily steps, heart rate, and notifications seamlessly.</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">$199.99</span>
+                    <button class="btn-buy">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-img">💻</div>
+                    <div class="product-category">Accessories</div>
+                    <h3 class="product-title">Ergonomic Keyboard</h3>
+                    <p class="product-desc">Mechanical wireless keyboard with customizable RGB backlighting.</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">$89.99</span>
+                    <button class="btn-buy">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-img">📷</div>
+                    <div class="product-category">Photography</div>
+                    <h3 class="product-title">Mini Action Camera</h3>
+                    <p class="product-desc">Capture your outdoor adventures in stunning 4K ultra HD resolution.</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">$249.99</span>
+                    <button class="btn-buy">Buy Now</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

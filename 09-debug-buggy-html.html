@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Debugged & Fixed Version</title>
+  <style>
+    :root {
+      --primary-color: #2b2b2b;
+      --accent-color: #0056b3;
+      --bg-color: #fdfdfd;
+      --card-bg: #ffffff;
+      --border-color: #e0e0e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    article.resume {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    header {
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    header p.tagline {
+      font-size: 1.1rem;
+      color: #555555;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    address {
+      font-style: normal;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    address a, address span {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    address a:hover {
+      text-decoration: underline;
+    }
+
+    main section {
+      margin-bottom: 2rem;
+    }
+
+    main section h2 {
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-color);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    article.experience-item, article.education-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+
+    .item-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .item-org {
+      font-weight: 600;
+      color: #444444;
+    }
+
+    time {
+      font-size: 0.9rem;
+      color: #666666;
+    }
+
+    ul {
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    dl.skills-list {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.5rem 1.5rem;
+    }
+
+    dl.skills-list dt {
+      font-weight: 700;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      article.resume {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      article.resume {
+        padding: 1.5rem;
+      }
+      .item-header {
+        flex-direction: column;
+      }
+      dl.skills-list {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+      dl.skills-list dt {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <article class="resume">
+    <header>
+      <h1>Alex Morgan</h1>
+      <p class="tagline">Software Engineer & Debugging Specialist</p>
+      <address>
+        <span>📍 San Francisco, CA</span>
+        <a href="mailto:alex.morgan@example.com">📧 alex.morgan@example.com</a>
+        <a href="tel:+15550192834">📞 (555) 019-2834</a>
+      </address>
+    </header>
+
+    <main>
+      <section id="summary" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Professional Summary</h2>
+        <p>
+          Resourceful Software Engineer with a passion for troubleshooting complex layout bugs, correcting malformed markup, and optimizing web application performance across diverse browsers and assistive technologies.
+        </p>
+      </section>
+
+      <section id="experience" aria-labelledby="experience-heading">
+        <h2 id="experience-heading">Experience</h2>
+
+        <article class="experience-item">
+          <header class="item-header">
+            <h3 class="item-title">Frontend Bug Fixer <span class="item-org">@ WebCare Labs</span></h3>
+            <p><time datetime="2023-01">January 2023</time> &ndash; <time datetime="2026-11">Present</time></p>
+          </header>
+          <ul>
+            <li>Resolved syntax errors, unclosed tags, and invalid DOM hierarchies across multiple production codebases.</li>
+            <li>Optimized CSS specificity charts to eliminate cascading style conflicts and improve rendering speeds.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="education" aria-labelledby="education-heading">
+        <h2 id="education-heading">Education</h2>
+
+        <article class="education-item">
+          <header class="item-header">
+            <h3 class="item-title">B.S. in Computer Science <span class="item-org">@ University of California, Berkeley</span></h3>
+            <p><time datetime="2018-08">August 2018</time> &ndash; <time datetime="2022-05">May 2022</time></p>
+          </header>
+        </article>
+      </section>
+
+      <section id="skills" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Technical Skills</h2>
+        <dl class="skills-list">
+          <dt>Languages</dt>
+          <dd>HTML5, CSS3, JavaScript (ES6+), TypeScript</dd>
+
+          <dt>Tools</dt>
+          <dd>Git, Chrome DevTools, W3C Validator, ESLint</dd>
+        </dl>
+      </section>
+    </main>
+  </article>
+
+</body>
+</html>

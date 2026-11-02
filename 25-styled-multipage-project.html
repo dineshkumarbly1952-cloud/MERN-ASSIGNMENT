@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Styled Multi-Page Project Portal | Design Systems & Architecture</title>
+  <meta name="description" content="The culmination of our styled multi-page project portal, unifying design tokens, custom typography, color harmony, and responsive HTML layouts.">
+  <meta name="keywords" content="styled project, multi-page portal, design tokens, CSS architecture, responsive layout, Alex Morgan">
+  <meta name="author" content="Alex Morgan">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Styled Multi-Page Project Portal">
+  <meta property="og:description" content="Explore the fully styled multi-page project hub built with design tokens and semantic HTML5.">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* ==========================================
+       DESIGN TOKENS (Primitive & Semantic Layers)
+       ========================================== */
+    :root {
+      /* Primitive Color Palette */
+      --token-slate-50: #f8fafc;
+      --token-slate-100: #f1f5f9;
+      --token-slate-200: #e2e8f0;
+      --token-slate-400: #94a3b8;
+      --token-slate-600: #475569;
+      --token-slate-800: #1e293b;
+      --token-slate-900: #0f172a;
+
+      --token-blue-500: #2563eb;
+      --token-blue-600: #1d4ed8;
+      --token-blue-50: #eff6ff;
+      --token-sky-400: #38bdf8;
+
+      /* Spacing Scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+
+      /* Typography Scale */
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "Courier New", Courier, monospace;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.15rem;
+      --text-xl: 1.4rem;
+      --text-2xl: 2.25rem;
+
+      /* Semantic Tokens */
+      --bg-color: var(--token-slate-50);
+      --card-bg: #ffffff;
+      --text-main: var(--token-slate-800);
+      --text-muted: var(--token-slate-600);
+      --primary-color: var(--token-slate-900);
+      --accent-color: var(--token-blue-500);
+      --accent-hover: var(--token-blue-600);
+      --border-color: var(--token-slate-200);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Site Navigation Header */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    nav.navbar {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: var(--text-lg);
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: var(--text-sm);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--accent-color);
+      background-color: var(--token-slate-100);
+    }
+
+    .nav-links a.active {
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    /* Main Container */
+    main.container {
+      max-width: 1000px;
+      margin: var(--space-xl) auto;
+      padding: 0 var(--space-lg);
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: var(--space-xl);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--space-xl);
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03);
+    }
+
+    /* Hero Layout */
+    .hero-layout {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--border-color);
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.05);
+    }
+
+    h1 {
+      font-size: var(--text-2xl);
+      color: var(--primary-color);
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.5px;
+    }
+
+    p.tagline {
+      font-size: var(--text-lg);
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    p {
+      margin-bottom: var(--space-md);
+      color: var(--text-muted);
+    }
+
+    /* Styled Pages Directory Grid */
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .page-card {
+      background-color: var(--token-slate-50);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .page-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.06);
+    }
+
+    .page-card h3 {
+      font-size: 1.15rem;
+      color: var(--primary-color);
+      margin-bottom: var(--space-sm);
+    }
+
+    .page-card p {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-lg);
+      flex-grow: 1;
+    }
+
+    .page-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--accent-color);
+      text-decoration: none;
+      margin-top: auto;
+    }
+
+    .page-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer Details */
+    footer.site-footer {
+      text-align: center;
+      padding: var(--space-lg);
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      margin-top: auto;
+    }
+
+    footer.site-footer a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav.navbar {
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+      main.container {
+        margin: var(--space-lg) auto;
+        padding: 0 var(--space-sm);
+      }
+      .content-card {
+        padding: var(--space-lg);
+      }
+      .hero-layout {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-avatar {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main Site Navigation">
+      <a href="25-styled-multipage-project.html" class="nav-brand">
+        🎨 Styled Portal Hub
+      </a>
+      <ul class="nav-links">
+        <li><a href="25-styled-multipage-project.html" class="active" aria-current="page">Hub Home</a></li>
+        <li><a href="23-resume-font-colour.html">Styled Resume</a></li>
+        <li><a href="24-design-tokens.html">Design Tokens</a></li>
+        <li><a href="22-selector-types.html">CSS Selectors</a></li>
+        <li><a href="21-lightly-styled-page.html">Minimalist View</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    
+    <!-- Hero / Welcome Section -->
+    <article id="overview" class="content-card">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <h1>Styled Multi-Page Portal</h1>
+          <p class="tagline">Unified Design Systems, Tokens, and Semantic HTML Architecture</p>
+          <p>
+            Welcome to the final hub of our styled project series. This page integrates the design token principles, custom color harmony, and robust typography established across our recent modules into a cohesive, production-ready web application portal.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=400&q=80" alt="Clean code editor workspace showcasing structured design systems" class="hero-avatar">
+        </div>
+      </div>
+    </article>
+
+    <!-- Styled Pages Directory Section -->
+    <section id="directory" aria-labelledby="directory-heading">
+      <article class="content-card">
+        <h2 id="directory-heading">Explore Styled Project Modules</h2>
+        <div class="pages-grid">
+          
+          <article class="page-card">
+            <h3>Custom Styled Resume</h3>
+            <p>A professional CV styled with refined typography scales, custom color variables, and print-optimized media queries.</p>
+            <a href="23-resume-font-colour.html" class="page-link">Open Resume &rarr;</a>
+          </article>
+
+          <article class="page-card">
+            <h3>Design Tokens Architecture</h3>
+            <p>Comprehensive technical reference explaining primitive values versus semantic aliases in modern design systems.</p>
+            <a href="24-design-tokens.html" class="page-link">Open Guide &rarr;</a>
+          </article>
+
+          <article class="page-card">
+            <h3>CSS Selectors & Specificity</h3>
+            <p>Master reference guide detailing selector types, combinators, pseudo-classes, and specificity calculations.</p>
+            <a href="22-selector-types.html" class="page-link">Open Guide &rarr;</a>
+          </article>
+
+          <article class="page-card">
+            <h3>Lightly Styled Minimalist Page</h3>
+            <p>A clean, uncluttered layout emphasizing generous whitespace, high legibility, and restrained visual styling.</p>
+            <a href="21-lightly-styled-page.html" class="page-link">Open Page &rarr;</a>
+          </article>
+
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Alex Morgan Styled Portal. Built with CSS Custom Properties and Semantic HTML5.</p>
+  </footer>
+
+</body>
+</html>

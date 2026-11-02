@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>CSS Selector Types & Specificity Guide | Alex Morgan</title>
+  <meta name="description" content="A comprehensive reference guide detailing CSS selector types, specificity rules, combinators, and best practices for modern web stylesheets.">
+  <meta name="keywords" content="CSS selectors, specificity, element selector, class selector, ID selector, attribute selector, pseudo-class">
+  <meta name="author" content="Alex Morgan">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="CSS Selector Types & Specificity Guide">
+  <meta property="og:description" content="Master CSS selectors and specificity calculations with interactive code examples and clear structural breakdowns.">
+  <meta property="og:type" content="article">
+
+  <style>
+    :root {
+      --primary-color: #0f172a;
+      --accent-color: #2563eb;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #334155;
+      --muted-text: #64748b;
+      --border-color: #cbd5e1;
+      --code-bg: #0f172a;
+      --code-color: #38bdf8;
+      --table-stripe: #f1f5f9;
+      --table-hover: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Site Navigation Header */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    nav.navbar {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--accent-color);
+    }
+
+    /* Main Container */
+    main.container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    p.tagline {
+      font-size: 1.15rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #475569;
+    }
+
+    /* Table Styling */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--table-stripe);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: var(--table-hover);
+    }
+
+    code {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+
+    /* Code Block Demo */
+    .code-demo {
+      background-color: var(--code-bg);
+      color: var(--code-color);
+      padding: 1.25rem 1.5rem;
+      border-radius: 8px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 1.25rem 0;
+      overflow-x: auto;
+    }
+
+    /* Footer Details */
+    footer.site-footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted-text);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      margin-top: auto;
+    }
+
+    footer.site-footer a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav.navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      main.container {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main Site Navigation">
+      <a href="20-multipage-project.html" class="nav-brand">🌐 Project Portal</a>
+      <ul class="nav-links">
+        <li><a href="20-multipage-project.html">Portal Home</a></li>
+        <li><a href="21-lightly-styled-page.html">Minimalist View</a></li>
+        <li><a href="19-meta-tags-audit.html">SEO Audit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    
+    <article class="content-card">
+      <header>
+        <h1>CSS Selector Types & Specificity</h1>
+        <p class="tagline">A Master Reference for Targeting DOM Elements and Calculating Rule Priority</p>
+      </header>
+
+      <section id="overview">
+        <h2>Introduction to CSS Selectors</h2>
+        <p>
+          CSS selectors are the foundational patterns used to select and style elements within an HTML document. Understanding the various selector categories—ranging from simple element names to complex pseudo-classes and combinators—allows developers to write clean, highly maintainable stylesheets without unnecessary rule overrides.
+        </p>
+      </section>
+
+      <section id="selector-categories">
+        <h2>Primary Selector Categories</h2>
+        <div class="table-responsive">
+          <table>
+            <caption>Summary of core CSS selector types, syntax examples, and descriptions</caption>
+            <thead>
+              <tr>
+                <th scope="col">Selector Type</th>
+                <th scope="col">Example Syntax</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Universal Selector</strong></td>
+                <td><code>* { margin: 0; }</code></td>
+                <td>Matches any element in the document tree.</td>
+              </tr>
+              <tr>
+                <td><strong>Type / Element Selector</strong></td>
+                <td><code>p { line-height: 1.6; }</code></td>
+                <td>Matches all HTML elements of the specified tag name.</td>
+              </tr>
+              <tr>
+                <td><strong>Class Selector</strong></td>
+                <td><code>.card-bg { background: #fff; }</code></td>
+                <td>Matches all elements containing the specified class attribute value.</td>
+              </tr>
+              <tr>
+                <td><strong>ID Selector</strong></td>
+                <td><code>#main-header { padding: 1rem; }</code></td>
+                <td>Matches a single unique element possessing the matching ID attribute.</td>
+              </tr>
+              <tr>
+                <td><strong>Attribute Selector</strong></td>
+                <td><code>input[type="text"] { width: 100%; }</code></td>
+                <td>Matches elements based on the presence or value of an attribute.</td>
+              </tr>
+              <tr>
+                <td><strong>Pseudo-Class</strong></td>
+                <td><code>a:hover { color: #2563eb; }</code></td>
+                <td>Matches elements based on a specific state or structural position.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="code-example">
+        <h2>Practical CSS Code Sample</h2>
+        <p>Below is a clean example showcasing multiple selector types working together in a structured stylesheet:</p>
+        <div class="code-demo">
+          /* Type Selector */<br>
+          body { font-family: sans-serif; color: #334155; }<br><br>
+          /* Class Selector */<br>
+          .content-card { background: #ffffff; border: 1px solid #cbd5e1; }<br><br>
+          /* ID Selector */<br>
+          #overview { margin-bottom: 2rem; }<br><br>
+          /* Attribute & Pseudo-Class */<br>
+          a[target="_blank"]:hover { text-decoration: underline; }
+        </div>
+      </section>
+
+      <section id="conclusion">
+        <h2>Best Practices</h2>
+        <p>
+          Keep selectors as flat and specific as necessary. Over-relying on high-specificity IDs or deeply nested descendant combinators makes stylesheets rigid and difficult to debug over time.
+        </p>
+      </section>
+    </article>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Alex Morgan Guide. <a href="20-multipage-project.html">Return to Portal Index</a></p>
+  </footer>
+
+</body>
+</html>

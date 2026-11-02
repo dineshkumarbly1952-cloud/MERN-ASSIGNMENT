@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>43 - Comprehensive Landing Page (CSS Grid & Flexbox Masterclass)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #151c2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --border: #243049;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- 1. NAVBAR (Flexbox) --- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* --- 2. HERO SECTION (Flexbox & Grid Mix) --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #818cf8, var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-card-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        /* --- 3. FEATURES SECTION (CSS Grid Auto-Fit) --- */
+        .features-section {
+            padding: 60px 0 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 0;
+            }
+            .hero-content {
+                max-width: 100%;
+            }
+            .hero-actions, .hero-badge {
+                justify-content: center;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navbar (Flexbox) -->
+        <nav class="navbar">
+            <a href="#" class="nav-brand">
+                <div class="brand-logo">⚡</div>
+                GridFlex UI
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Architecture</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <a href="#" class="nav-btn">Get Started</a>
+        </nav>
+
+        <!-- Hero Section (Flexbox & Grid Combination) -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-badge">🚀 Ultimate Layout Mastery</span>
+                <h1 class="hero-title">Combining <span>CSS Grid & Flexbox</span> for Modern Web Apps</h1>
+                <p class="hero-desc">Discover how pairing CSS Grid for macro-layout structures with Flexbox for micro-component alignments unlocks limitless responsive design power.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn-primary">Explore Components</a>
+                    <a href="#" class="btn-secondary">GitHub Repo</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-card-box">
+                    <div style="font-size: 3.5rem; margin-bottom: 16px;">🧩</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">Hybrid Architecture</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Using Grid for overall structure and Flexbox for internal alignments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section (CSS Grid Auto-Fit) -->
+        <section class="features-section">
+            <div class="section-header">
+                <h2>Why Hybrid Layouts Matter</h2>
+                <p>Leverage the specialized strengths of both layout engines for clean, maintainable code.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div>
+                        <div class="feature-icon">📐</div>
+                        <h3 class="feature-title">Macro-Layouts with Grid</h3>
+                        <p class="feature-desc">Control two-dimensional rows and columns effortlessly for page structures, sidebars, and dashboards.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div>
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">Micro-Alignments with Flex</h3>
+                        <p class="feature-desc">Perfect for distributing space and aligning items inside navigation bars, buttons, and card footers.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div>
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">Fully Responsive Scaling</h3>
+                        <p class="feature-desc">Combine <code>auto-fit</code> with flexible gaps to eliminate complex media query bottlenecks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

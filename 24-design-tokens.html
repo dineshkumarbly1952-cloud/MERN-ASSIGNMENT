@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Design Tokens & CSS Variables Architecture | Alex Morgan</title>
+  <meta name="description" content="A comprehensive guide to design tokens, primitive vs. semantic variables, and scalable CSS architecture for modern design systems.">
+  <meta name="keywords" content="design tokens, CSS variables, custom properties, design systems, scalable CSS, frontend architecture">
+  <meta name="author" content="Alex Morgan">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Design Tokens & CSS Variables Architecture">
+  <meta property="og:description" content="Learn how to structure primitive and semantic design tokens using CSS custom properties for robust design systems.">
+  <meta property="og:type" content="article">
+
+  <style>
+    /* ==========================================
+       DESIGN TOKENS (Primitive & Semantic Layers)
+       ========================================== */
+    :root {
+      /* Primitive Color Palette */
+      --token-slate-50: #f8fafc;
+      --token-slate-100: #f1f5f9;
+      --token-slate-200: #e2e8f0;
+      --token-slate-400: #94a3b8;
+      --token-slate-600: #475569;
+      --token-slate-800: #1e293b;
+      --token-slate-900: #0f172a;
+
+      --token-blue-500: #2563eb;
+      --token-blue-600: #1d4ed8;
+      --token-blue-50: #eff6ff;
+
+      --token-sky-400: #38bdf8;
+      
+      --token-emerald-500: #10b981;
+      --token-emerald-50: #ecfdf5;
+      --token-emerald-900: #065f46;
+
+      /* Spacing Scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+
+      /* Typography Scale */
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "Courier New", Courier, monospace;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.15rem;
+      --text-xl: 1.4rem;
+      --text-2xl: 2.25rem;
+
+      /* Semantic Tokens */
+      --bg-color: var(--token-slate-50);
+      --card-bg: #ffffff;
+      --text-main: var(--token-slate-800);
+      --text-muted: var(--token-slate-600);
+      --primary-color: var(--token-slate-900);
+      --accent-color: var(--token-blue-500);
+      --accent-hover: var(--token-blue-600);
+      --border-color: var(--token-slate-200);
+      --code-bg: var(--token-slate-900);
+      --code-color: var(--token-sky-400);
+      --table-stripe: var(--token-slate-100);
+      --table-hover: var(--token-slate-200);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Site Navigation Header */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    nav.navbar {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: var(--text-lg);
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: var(--text-sm);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--accent-color);
+    }
+
+    /* Main Container */
+    main.container {
+      max-width: 900px;
+      margin: var(--space-xl) auto;
+      padding: 0 var(--space-lg);
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: var(--space-xl);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--space-xl);
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03);
+    }
+
+    h1 {
+      font-size: var(--text-2xl);
+      color: var(--primary-color);
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.5px;
+    }
+
+    p.tagline {
+      font-size: var(--text-lg);
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: var(--space-lg);
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: var(--space-sm);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    p {
+      margin-bottom: var(--space-md);
+      color: var(--text-muted);
+    }
+
+    /* Table Styling */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin: var(--space-lg) 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: var(--text-sm);
+      white-space: nowrap;
+    }
+
+    th, td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--table-stripe);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: var(--table-hover);
+    }
+
+    code {
+      font-family: var(--font-mono);
+      background-color: var(--token-slate-100);
+      color: var(--token-slate-900);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: var(--text-sm);
+    }
+
+    /* Code Block Demo */
+    .code-demo {
+      background-color: var(--code-bg);
+      color: var(--code-color);
+      padding: var(--space-lg);
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      margin: var(--space-lg) 0;
+      overflow-x: auto;
+    }
+
+    /* Token Badge */
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-primitive {
+      background-color: var(--token-slate-200);
+      color: var(--token-slate-800);
+    }
+
+    .badge-semantic {
+      background-color: var(--token-blue-50);
+      color: var(--token-blue-600);
+    }
+
+    /* Footer Details */
+    footer.site-footer {
+      text-align: center;
+      padding: var(--space-lg);
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      margin-top: auto;
+    }
+
+    footer.site-footer a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav.navbar {
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+      main.container {
+        margin: var(--space-lg) auto;
+        padding: 0 var(--space-sm);
+      }
+      .content-card {
+        padding: var(--space-lg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main Site Navigation">
+      <a href="20-multipage-project.html" class="nav-brand">🌐 Project Portal</a>
+      <ul class="nav-links">
+        <li><a href="20-multipage-project.html">Portal Home</a></li>
+        <li><a href="22-selector-types.html">CSS Selectors</a></li>
+        <li><a href="23-resume-font-colour.html">Styled Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    
+    <article class="content-card">
+      <header>
+        <h1>Design Tokens Architecture</h1>
+        <p class="tagline">Bridging Design Systems and CSS Custom Properties for Scalable Web Applications</p>
+      </header>
+
+      <section id="overview">
+        <h2>What are Design Tokens?</h2>
+        <p>
+          Design tokens are the visual design building blocks of a design system—storing atomic values such as color hex codes, spacing increments, font sizes, and border radii. Instead of hardcoding values directly into stylesheets, design tokens act as a single source of truth across design tools (like Figma) and production codebases.
+        </p>
+      </section>
+
+      <section id="token-layers">
+        <h2>Primitive vs. Semantic Tokens</h2>
+        <p>
+          A robust design token architecture typically separates values into two distinct layers: <strong>Primitive Tokens</strong> (raw foundational values) and <strong>Semantic Tokens</strong> (contextual aliases).
+        </p>
+        <div class="table-responsive">
+          <table>
+            <caption>Summary of Design Token Layers</caption>
+            <thead>
+              <tr>
+                <th scope="col">Layer</th>
+                <th scope="col">Example Variable</th>
+                <th scope="col">Purpose / Definition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-primitive">Primitive</span></td>
+                <td><code>--token-blue-500: #2563eb;</code></td>
+                <td>Stores raw, uncontextualized values (color scales, exact pixel sizes).</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-semantic">Semantic</span></td>
+                <td><code>--accent-color: var(--token-blue-500);</code></td>
+                <td>Assigns meaning and context (e.g., interactive elements, primary branding).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="code-implementation">
+        <h2>CSS Custom Properties Implementation</h2>
+        <p>Below is how design tokens are structured in practice using native CSS `:root` custom properties:</p>
+        <div class="code-demo">
+          :root {<br>
+          &nbsp;&nbsp;/* Primitive Tokens */<br>
+          &nbsp;&nbsp;--token-slate-900: #0f172a;<br>
+          &nbsp;&nbsp;--token-blue-500: #2563eb;<br>
+          &nbsp;&nbsp;--space-md: 1rem;<br><br>
+          &nbsp;&nbsp;/* Semantic Aliases */<br>
+          &nbsp;&nbsp;--primary-color: var(--token-slate-900);<br>
+          &nbsp;&nbsp;--accent-color: var(--token-blue-500);<br>
+          &nbsp;&nbsp;--card-padding: var(--space-md);<br>
+          }
+        </div>
+      </section>
+
+      <section id="benefits">
+        <h2>Key Benefits of Design Tokens</h2>
+        <p>
+          Implementing a tokenized stylesheet ensures effortless theme switching (such as dark mode support), maintains brand consistency across multi-page portals, and drastically simplifies long-term maintenance when design guidelines evolve.
+        </p>
+      </section>
+    </article>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Alex Morgan Guide. <a href="20-multipage-project.html">Return to Portal Index</a></p>
+  </footer>
+
+</body>
+</html>

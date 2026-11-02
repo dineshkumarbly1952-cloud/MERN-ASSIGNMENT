@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.Tech Environmental Engineering - Course Overview</title>
+  <style>
+    :root {
+      --primary-color: #1b4332;
+      --secondary-color: #2d6a4f;
+      --accent-color: #52b788;
+      --bg-color: #f4f9f4;
+      --card-bg: #ffffff;
+      --text-color: #2b2b2b;
+      --border-color: #d8f3dc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Sticky Navigation Bar */
+    nav.navbar {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a:focus {
+      color: var(--secondary-color);
+    }
+
+    /* Main Container */
+    .course-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    }
+
+    .hero-layout {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .hero-img-container {
+      flex-shrink: 0;
+    }
+
+    .hero-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--border-color);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    p.tagline {
+      font-size: 1.15rem;
+      color: var(--secondary-color);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #4a5568;
+    }
+
+    /* Subjects Grid */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .subject-card {
+      background-color: #f8faf8;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
+    .subject-thumbnail {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .subject-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .subject-card h3 {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .subject-card p {
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .subject-link {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      text-decoration: none;
+      margin-top: auto;
+    }
+
+    .subject-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact / Inquiry List */
+    .contact-list {
+      list-style: none;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .contact-list a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #52796f;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      nav.navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+      .course-container {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+      }
+      section {
+        padding: 1.5rem;
+      }
+      .hero-layout {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-img-container {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <nav class="navbar">
+    <a href="#hero" class="nav-brand">B.Tech Environmental Engineering</a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#subjects">Key Subjects</a></li>
+      <li><a href="#contact">Inquiries</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="course-container">
+    
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <h1>Environmental Engineering</h1>
+          <p class="tagline">Engineering Sustainable Solutions for a Greener Tomorrow</p>
+          <p>
+            B.Tech Environmental Engineering is an interdisciplinary undergraduate program combining principles of engineering, chemistry, biology, and earth sciences to protect public health and preserve natural ecosystems.
+          </p>
+        </div>
+        <div class="hero-img-container">
+          <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=400&q=80" alt="Lush green forest landscape with sustainable energy wind turbines in the background" class="hero-avatar">
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview">
+      <h2>Program Overview</h2>
+      <p>
+        The curriculum focuses on developing advanced technologies and management practices for water purification, air pollution control, solid and hazardous waste management, renewable energy integration, and environmental impact assessments.
+      </p>
+      <p>
+        Students gain practical laboratory experience, fieldwork exposure, and analytical skills necessary to tackle pressing global challenges such as climate change, resource depletion, and pollution mitigation.
+      </p>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects">
+      <h2>Core Subjects & Focus Areas</h2>
+      <div class="subjects-grid">
+        <div class="subject-card">
+          <img src="https://images.unsplash.com/photo-1541888946425-d0fbb18f86f3?auto=format&fit=crop&w=600&q=80" alt="Modern water treatment facility tanks and filtration infrastructure" class="subject-thumbnail">
+          <div class="subject-info">
+            <h3>Water & Wastewater Engineering</h3>
+            <p>Study of municipal water supply systems, sewage treatment plants, hydraulic design, and advanced purification processes.</p>
+            <a href="#" class="subject-link">Learn More &rarr;</a>
+          </div>
+        </div>
+
+        <div class="subject-card">
+          <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=600&q=80" alt="Industrial smokestacks emitting gases contrasted against an urban sky" class="subject-thumbnail">
+          <div class="subject-info">
+            <h3>Air Pollution & Control</h3>
+            <p>Analysis of atmospheric pollutants, dispersion modeling, meteorological factors, and emission control equipment design.</p>
+            <a href="#" class="subject-link">Learn More &rarr;</a>
+          </div>
+        </div>
+
+        <div class="subject-card">
+          <img src="https://images.unsplash.com/photo-1532996122724-e3c3d9a0d58d?auto=format&fit=crop&w=600&q=80" alt="Recycling facility sorting facility with organized sorting bins" class="subject-thumbnail">
+          <div class="subject-info">
+            <h3>Solid & Hazardous Waste</h3>
+            <p>Comprehensive management strategies covering municipal waste collection, recycling techniques, and safe hazardous waste disposal.</p>
+            <a href="#" class="subject-link">Learn More &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Department & Admission Inquiries</h2>
+      <p>Looking for details regarding admission criteria, semester fee structures, career counseling, or syllabus guidelines? Get in touch:</p>
+      <ul class="contact-list">
+        <li>📧 Department Email: <a href="mailto:env.engineering@example.edu">env.engineering@example.edu</a></li>
+        <li>📱 Admissions Office: <a href="tel:+915812550100">+91 (581) 255-0100</a></li>
+        <li>🏛️ Institution Location: <a href="https://maps.google.com" target="_blank" rel="noopener">Campus Engineering Block, Academic Zone</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 B.Tech Environmental Engineering Program. Designed with semantic HTML5 and CSS3.</p>
+  </footer>
+
+</body>
+</html>

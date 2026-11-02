@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale5.0">
+    <title>CSS Text Overflow Solutions Assignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        h3 { color: #38bdf8; margin-top: 0; }
+
+        /* 1. Single-Line Ellipsis */
+        .sol-single {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: #090d16;
+            padding: 10px;
+        }
+
+        /* 2. Multi-Line Line Clamp */
+        .sol-multi {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            background: #090d16;
+            padding: 10px;
+        }
+
+        /* 3. Word Break / Wrap */
+        .sol-wrap {
+            overflow-wrap: break-word;
+            background: #090d16;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>CSS Text Overflow Techniques</h1>
+        
+        <!-- 1 -->
+        <div class="card">
+            <h3>1. Single-Line Truncation (Ellipsis)</h3>
+            <p class="sol-single">Yeh ek bahut hi lamba sentence hai jo ek hi line mein rahega aur aage jaakar teen dots (...) mein convert ho jayega.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="card">
+            <h3>2. Multi-Line Clamp (2 Lines)</h3>
+            <p class="sol-multi">Yeh multi-line text overflow ko handle karne ke liye use hota hai. Isme text sirf do lines tak dikhega aur uske baad automatically cut ho jayega bina layout kharab kiye.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="card">
+            <h3>3. Word Wrap (Break Long Words)</h3>
+            <p class="sol-wrap">Supercalifragilisticexpialidociousantidisestablishmentarianism</p>
+        </div>
+    </div>
+
+</body>
+</html>

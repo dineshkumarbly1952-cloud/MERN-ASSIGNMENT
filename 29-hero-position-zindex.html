@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section - Position & Z-Index Mastery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: #151c2e;
+            --primary: #6366f1;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #243049;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- HERO CONTAINER (Stacking Context Root) --- */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Layer 1: Background Gradient Mesh (z-index: 1) */
+        .hero-bg-glow {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%);
+            filter: blur(80px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Layer 2: Grid Lines Pattern (z-index: 2) */
+        .hero-grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Layer 3: Main Layout Grid Container (z-index: 10) */
+        .hero-container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Hero Left Content */
+        .hero-content {
+            position: relative;
+            z-index: 12;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #818cf8 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+            display: inline-block;
+        }
+
+        /* Hero Right Visual Stack */
+        .hero-visual {
+            position: relative;
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Layer Visual 1: Main Center Card (z-index: 15) */
+        .main-card {
+            position: relative;
+            z-index: 15;
+            width: 320px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-pink), var(--primary));
+        }
+
+        /* Layer Visual 2: Floating Badge (z-index: 20 - Highest element) */
+        .floating-badge {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            z-index: 20;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid var(--accent-cyan);
+            backdrop-filter: blur(8px);
+            padding: 10px 18px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Layer Visual 3: Backing Accent Card (z-index: 12) */
+        .backing-card {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            z-index: 12;
+            width: 280px;
+            background: rgba(21, 28, 46, 0.8);
+            border: 1px solid var(--accent-pink);
+            border-radius: 14px;
+            padding: 18px;
+            transform: rotate(-6deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- DOCUMENTATION TABLE SECTION --- */
+        .docs-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .docs-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .z-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .z-table th, .z-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .z-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge-z {
+            font-family: 'Fira Code', monospace;
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <!-- Layer 1: Glow Background -->
+        <div class="hero-bg-glow"></div>
+
+        <!-- Layer 2: Grid Pattern -->
+        <div class="hero-grid-pattern"></div>
+
+        <!-- Layer 3: Main Content -->
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">⚡ CSS Stacking Context Masterclass</div>
+                <h1 class="hero-title">Positioning & <span>Z-Index Layering</span></h1>
+                <p class="hero-desc">Learn how absolute positioning, relative positioning, and z-index stacking order work together to build multi-dimensional hero sections.</p>
+                <a href="#breakdown" class="btn-primary">View Layer Breakdown</a>
+            </div>
+
+            <!-- Right Visual Elements -->
+            <div class="hero-visual">
+                <!-- Topmost Layer -->
+                <div class="floating-badge">
+                    <span>🚀</span>
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Layer Rank</div>
+                        <div style="font-weight: 700; font-size: 0.85rem; color: var(--accent-cyan);">z-index: 20 (Top)</div>
+                    </div>
+                </div>
+
+                <!-- Middle Layer -->
+                <div class="main-card">
+                    <div class="card-header">
+                        <div class="avatar"></div>
+                        <div>
+                            <div style="font-weight: 700;">Main Focus Layer</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">z-index: 15</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">This card sits above background glows using relative positioning.</p>
+                    <div style="height: 6px; background: var(--primary); border-radius: 3px; width: 75%;"></div>
+                </div>
+
+                <!-- Bottom Layer -->
+                <div class="backing-card">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-pink);">Background Accent Layer</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">z-index: 12 (Rotated -6deg)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPLANATION TABLE SECTION -->
+    <section class="docs-section" id="breakdown">
+        <h2>Layer Breakdown & CSS Rules</h2>
+        <table class="z-table">
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>CSS Position</th>
+                    <th>Z-Index</th>
+                    <th>Stacking Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Floating Badge</td>
+                    <td><code>position: absolute;</code></td>
+                    <td><span class="badge-z">z-index: 20</span></td>
+                    <td>Overlaps main visual elements at the highest hierarchy level.</td>
+                </tr>
+                <tr>
+                    <td>Main Card Component</td>
+                    <td><code>position: relative;</code></td>
+                    <td><span class="badge-z">z-index: 15</span></td>
+                    <td>Primary interactive target card in middle layer focus.</td>
+                </tr>
+                <tr>
+                    <td>Backing Accent Card</td>
+                    <td><code>position: absolute;</code></td>
+                    <td><span class="badge-z">z-index: 12</span></td>
+                    <td>Rotated offset background accent element.</td>
+                </tr>
+                <tr>
+                    <td>Hero Content Container</td>
+                    <td><code>position: relative;</code></td>
+                    <td><span class="badge-z">z-index: 10</span></td>
+                    <td>Main grid parent holding text content and visuals.</td>
+                </tr>
+                <tr>
+                    <td>Background Grid Pattern</td>
+                    <td><code>position: absolute;</code></td>
+                    <td><span class="badge-z">z-index: 2</span></td>
+                    <td>Subtle structural overlay lines behind content.</td>
+                </tr>
+                <tr>
+                    <td>Radial Glow Backdrop</td>
+                    <td><code>position: absolute;</code></td>
+                    <td><span class="badge-z">z-index: 1</span></td>
+                    <td>Blurred atmospheric ambient glow behind all components.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</body>
+</html>

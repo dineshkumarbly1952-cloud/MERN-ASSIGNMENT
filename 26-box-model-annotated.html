@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>CSS Box Model & Annotated Layout Guide | Alex Morgan</title>
+  <meta name="description" content="An interactive visual and technical guide breaking down the CSS box model: content, padding, border, margin, and box-sizing.">
+  <meta name="keywords" content="CSS box model, content, padding, border, margin, box-sizing, web development, Alex Morgan">
+  <meta name="author" content="Alex Morgan">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="CSS Box Model & Annotated Layout Guide">
+  <meta property="og:description" content="Explore the mechanics of the CSS box model with interactive visual diagrams and clear annotations.">
+  <meta property="og:type" content="article">
+
+  <style>
+    /* ==========================================
+       DESIGN TOKENS & VARIABLES
+       ========================================== */
+    :root {
+      --token-slate-50: #f8fafc;
+      --token-slate-100: #f1f5f9;
+      --token-slate-200: #e2e8f0;
+      --token-slate-600: #475569;
+      --token-slate-800: #1e293b;
+      --token-slate-900: #0f172a;
+
+      --token-blue-500: #2563eb;
+      --token-blue-600: #1d4ed8;
+      --token-blue-50: #eff6ff;
+
+      --token-sky-400: #38bdf8;
+      
+      /* Box Model Layer Colors */
+      --color-margin: #fed7aa;   /* Soft orange */
+      --color-border: #fef08a;   /* Soft yellow */
+      --color-padding: #bbf7d0;  /* Soft green */
+      --color-content: #bae6fd;  /* Soft blue */
+
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "Courier New", Courier, monospace;
+      
+      --bg-color: var(--token-slate-50);
+      --card-bg: #ffffff;
+      --text-main: var(--token-slate-800);
+      --text-muted: var(--token-slate-600);
+      --primary-color: var(--token-slate-900);
+      --accent-color: var(--token-blue-500);
+      --border-color: var(--token-slate-200);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Site Navigation Header */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    nav.navbar {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--accent-color);
+    }
+
+    /* Main Container */
+    main.container {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    p.tagline {
+      font-size: 1.15rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.4rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       BOX MODEL VISUAL DIAGRAM (NESTED LAYERS)
+       ========================================== */
+    .box-model-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .layer-margin {
+      background-color: var(--color-margin);
+      border: 2px dashed #f97316;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 550px;
+      position: relative;
+    }
+
+    .layer-margin::before {
+      content: "MARGIN";
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #c2410c;
+      letter-spacing: 0.5px;
+    }
+
+    .layer-border {
+      background-color: var(--color-border);
+      border: 3px solid #ca8a04;
+      padding: 2rem;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .layer-border::before {
+      content: "BORDER";
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #854d0e;
+      letter-spacing: 0.5px;
+    }
+
+    .layer-padding {
+      background-color: var(--color-padding);
+      border: 2px dashed #15803d;
+      padding: 2rem;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .layer-padding::before {
+      content: "PADDING";
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #166534;
+      letter-spacing: 0.5px;
+    }
+
+    .layer-content {
+      background-color: var(--color-content);
+      border: 2px solid #0284c7;
+      padding: 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+      position: relative;
+    }
+
+    .layer-content::before {
+      content: "CONTENT AREA";
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.5px;
+    }
+
+    .layer-content p {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0;
+    }
+
+    /* Table Styling */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--token-slate-100);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      background-color: var(--token-slate-100);
+      color: var(--token-slate-900);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+
+    /* Footer Details */
+    footer.site-footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      margin-top: auto;
+    }
+
+    footer.site-footer a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav.navbar {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      main.container {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+      .layer-margin, .layer-border, .layer-padding {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main Site Navigation">
+      <a href="25-styled-multipage-project.html" class="nav-brand">🌐 Styled Portal Hub</a>
+      <ul class="nav-links">
+        <li><a href="25-styled-multipage-project.html">Hub Home</a></li>
+        <li><a href="24-design-tokens.html">Design Tokens</a></li>
+        <li><a href="22-selector-types.html">CSS Selectors</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    
+    <article class="content-card">
+      <header>
+        <h1>The CSS Box Model</h1>
+        <p class="tagline">An Annotated Visual Breakdown of Content, Padding, Border, and Margin</p>
+      </header>
+
+      <section id="overview">
+        <h2>Understanding the Box Model</h2>
+        <p>
+          In web development, every HTML element is represented as a rectangular box structured by the CSS box model. Understanding how content, padding, borders, and margins interact is fundamental to precise layout control and responsive design.
+        </p>
+      </section>
+
+      <!-- Visual Box Model Diagram -->
+      <section id="diagram">
+        <h2>Visual Layer Diagram</h2>
+        <div class="box-model-container">
+          <div class="layer-margin">
+            <div class="layer-border">
+              <div class="layer-padding">
+                <div class="layer-content">
+                  <p>Text & Elements Inside Box</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Box Model Components Table -->
+      <section id="components">
+        <h2>Component Breakdown</h2>
+        <div class="table-responsive">
+          <table>
+            <caption>Summary of the four primary layers of the CSS box model</caption>
+            <thead>
+              <tr>
+                <th scope="col">Layer</th>
+                <th scope="col">Description</th>
+                <th scope="col">CSS Property Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Content</strong></td>
+                <td>The actual text, images, or nested HTML elements inside the box.</td>
+                <td><code>width</code>, <code>height</code></td>
+              </tr>
+              <tr>
+                <td><strong>2. Padding</strong></td>
+                <td>Clearance space surrounding the content area, inside the border. Inherits background color.</td>
+                <td><code>padding: 1rem;</code></td>
+              </tr>
+              <tr>
+                <td><strong>3. Border</strong></td>
+                <td>A structural line wrapping around the padding and content.</td>
+                <td><code>border: 1px solid #cbd5e1;</code></td>
+              </tr>
+              <tr>
+                <td><strong>4. Margin</strong></td>
+                <td>Transparent clearance space outside the border, separating the element from neighboring boxes.</td>
+                <td><code>margin: 1.5rem auto;</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="box-sizing">
+        <h2>The Importance of <code>box-sizing: border-box</code></h2>
+        <p>
+          By default, browsers use <code>content-box</code> sizing, meaning an element's specified width applies only to the content area, and padding/borders are added on top, increasing the final rendered width. Modern CSS design universally adopts <code>box-sizing: border-box;</code> via global resets so that padding and borders are included within the element's defined width and height.
+        </p>
+      </section>
+    </article>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Alex Morgan Guide. <a href="25-styled-multipage-project.html">Return to Portal Hub</a></p>
+  </footer>
+
+</body>
+</html>

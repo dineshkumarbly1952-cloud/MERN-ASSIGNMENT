@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42 - Responsive Layout Audit & Overflow Bug Fixes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #151c2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --accent-pink: #ec4899;
+            --accent-emerald: #10b981;
+            --border: #243049;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-emerald), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- AUDIT FIX GRID --- */
+        .audit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .audit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent-emerald);
+            margin-bottom: 12px;
+        }
+
+        .audit-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .audit-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .code-box {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #34d399;
+            white-space: pre-wrap;
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 768px) {
+            .audit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>42. Responsive Layout Audit & Bug Fixes</h1>
+            <p>Identifying common responsive layout failures, overflow bugs, and implementing robust CSS solutions.</p>
+        </header>
+
+        <!-- Audit Fix Cards Grid -->
+        <div class="audit-grid">
+
+            <!-- Fix 1 -->
+            <div class="audit-card">
+                <div>
+                    <span class="card-tag">Audit Fix 01</span>
+                    <h3>Flexbox Min-Width Overflow Bug</h3>
+                    <p>Flex items do not shrink below their minimum content size by default, causing long strings or elements to blow out parent bounds on mobile.</p>
+                </div>
+                <div class="code-box">/* Solution */
+.flex-item {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}</div>
+            </div>
+
+            <!-- Fix 2 -->
+            <div class="audit-card">
+                <div>
+                    <span class="card-tag">Audit Fix 02</span>
+                    <h3>CSS Grid Track Explosion Safeguard</h3>
+                    <p>Grid items containing long unbroken text or images can expand parent grid tracks beyond screen boundaries.</p>
+                </div>
+                <div class="code-box">/* Solution */
+.grid-container {
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}</div>
+            </div>
+
+            <!-- Fix 3 -->
+            <div class="audit-card">
+                <div>
+                    <span class="card-tag">Audit Fix 03</span>
+                    <h3>Viewport Units & Mobile Scroll Bars</h3>
+                    <p>Using <code>100vh</code> on mobile viewports causes vertical clipping behind browser address bars and touch navigation toolbars.</p>
+                </div>
+                <div class="code-box">/* Solution */
+.hero-section {
+  min-height: 100dvh; /* Dynamic Viewport Height */
+}</div>
+            </div>
+
+            <!-- Fix 4 -->
+            <div class="audit-card">
+                <div>
+                    <span class="card-tag">Audit Fix 04</span>
+                    <h3>Images & Media Responsive Scaling</h3>
+                    <p>Unconstrained media elements ignore container boundaries and overflow horizontally on small screen viewports.</p>
+                </div>
+                <div class="code-box">/* Solution */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

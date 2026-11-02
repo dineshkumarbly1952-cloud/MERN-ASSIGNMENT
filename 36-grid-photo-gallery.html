@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>36 - Modern CSS Grid Photo Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --accent: #ec4899;
+            --border: #334155;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* --- CSS GRID PHOTO GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-auto-rows: 220px;
+            gap: 20px;
+            grid-auto-flow: dense;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Overlay text on hover */
+        .item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.2) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .item-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #818cf8;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Span rules for Bento / Masonry Grid Effect */
+        .w-2 {
+            grid-column: span 2;
+        }
+
+        .h-2 {
+            grid-row: span 2;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .w-2 {
+                grid-column: span 1;
+            }
+            .h-2 {
+                grid-row: span 1;
+            }
+            .gallery-grid {
+                grid-auto-rows: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>36. CSS Grid Photo Gallery</h1>
+            <p>A responsive bento-style photo showcase built with CSS Grid, <code>auto-fit</code>, and dynamic column/row spans.</p>
+        </header>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+
+            <!-- Item 1 (Featured Large) -->
+            <div class="gallery-item w-2 h-2">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Mountain Landscape">
+                <div class="item-overlay">
+                    <span class="item-category">Nature</span>
+                    <h3 class="item-title">Alpine Mountain Pass</h3>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Night Sky">
+                <div class="item-overlay">
+                    <span class="item-category">Astronomy</span>
+                    <h3 class="item-title">Starry Night Peak</h3>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80" alt="Foggy Forest">
+                <div class="item-overlay">
+                    <span class="item-category">Wilderness</span>
+                    <h3 class="item-title">Misty Pine Forest</h3>
+                </div>
+            </div>
+
+            <!-- Item 4 (Tall) -->
+            <div class="gallery-item h-2">
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" alt="Sunlight Forest">
+                <div class="item-overlay">
+                    <span class="item-category">Landscape</span>
+                    <h3 class="item-title">Sunlit Woodland Canopy</h3>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Ocean Beach">
+                <div class="item-overlay">
+                    <span class="item-category">Coastal</span>
+                    <h3 class="item-title">Tropical Shoreline</h3>
+                </div>
+            </div>
+
+            <!-- Item 6 (Wide) -->
+            <div class="gallery-item w-2">
+                <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80" alt="Ocean Waves">
+                <div class="item-overlay">
+                    <span class="item-category">Seascape</span>
+                    <h3 class="item-title">Rolling Ocean Horizon</h3>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80" alt="Green Valley">
+                <div class="item-overlay">
+                    <span class="item-category">Scenery</span>
+                    <h3 class="item-title">Sunset Over Hills</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

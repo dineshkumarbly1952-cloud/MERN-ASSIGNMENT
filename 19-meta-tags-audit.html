@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary Document Meta -->
+  <title>Meta Tags Audit & Technical SEO Standards | Alex Morgan</title>
+  <meta name="description" content="A comprehensive guide and checklist for auditing HTML meta tags, Open Graph protocols, Twitter Cards, and technical SEO head elements for modern web applications.">
+  <meta name="keywords" content="meta tags, HTML head, SEO audit, Open Graph, Twitter Cards, web accessibility, semantic HTML">
+  <meta name="author" content="Alex Morgan">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://example.com/meta-tags-audit.html">
+  <meta property="og:title" content="Meta Tags Audit & Technical SEO Standards">
+  <meta property="og:description" content="Master essential head tags, social graph tags, and SEO configurations for clean, modern HTML documents.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://example.com/meta-tags-audit.html">
+  <meta name="twitter:title" content="Meta Tags Audit & Technical SEO Standards">
+  <meta name="twitter:description" content="Master essential head tags, social graph tags, and SEO configurations for clean, modern HTML documents.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Favicon and Theme -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏷️</text></svg>">
+  <meta name="theme-color" content="#1e293b">
+
+  <style>
+    :root {
+      --primary-color: #1e293b;
+      --accent-color: #2563eb;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #334155;
+      --border-color: #cbd5e1;
+      --code-bg: #0f172a;
+      --code-color: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      color: var(--primary-color);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-critical {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .badge-recommended {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+
+    .badge-optional {
+      background-color: #f3f4f6;
+      color: #374151;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <header>
+      <h1>Meta Tags Audit Checklist</h1>
+      <p class="description">Essential document header tags for search optimization, mobile responsiveness, and social preview cards.</p>
+    </header>
+
+    <section>
+      <h2>Critical Header Tags</h2>
+      <div class="table-responsive">
+        <table>
+          <caption>Summary of mandatory HTML head meta elements</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tag Name / Property</th>
+              <th scope="col">Category</th>
+              <th scope="col">Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;meta charset="UTF-8"&gt;</code></td>
+              <td><span class="badge badge-critical">Critical</span></td>
+              <td>Specifies the character encoding for the document to prevent text display bugs.</td>
+            </tr>
+            <tr>
+              <td><code>&lt;meta name="viewport"&gt;</code></td>
+              <td><span class="badge badge-critical">Critical</span></td>
+              <td>Ensures proper responsive scale and layout on mobile devices.</td>
+            </tr>
+            <tr>
+              <td><code>&lt;title&gt;</code></td>
+              <td><span class="badge badge-critical">Critical</span></td>
+              <td>Defines page title displayed in browser tabs and search engine results (SERP).</td>
+            </tr>
+            <tr>
+              <td><code>&lt;meta name="description"&gt;</code></td>
+              <td><span class="badge badge-recommended">Recommended</span></td>
+              <td>Provides concise page summary used in search result snippets.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Social Graph Protocol Tags</h2>
+      <div class="table-responsive">
+        <table>
+          <caption>Summary of Open Graph and Twitter card properties</caption>
+          <thead>
+            <tr>
+              <th scope="col">Property</th>
+              <th scope="col">Platform</th>
+              <th scope="col">Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>og:title</code> / <code>twitter:title</code></td>
+              <td>Facebook / X</td>
+              <td>Title displayed when the link is shared on social platforms.</td>
+            </tr>
+            <tr>
+              <td><code>og:description</code></td>
+              <td>Facebook / X</td>
+              <td>Summary description for shared link cards.</td>
+            </tr>
+            <tr>
+              <td><code>og:image</code> / <code>twitter:image</code></td>
+              <td>Facebook / X</td>
+              <td>Preview thumbnail image URL displayed on social feeds.</td>
+            </tr>
+            <tr>
+              <td><code>twitter:card</code></td>
+              <td>X (Twitter)</td>
+              <td>Card layout type (e.g., <code>summary_large_image</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

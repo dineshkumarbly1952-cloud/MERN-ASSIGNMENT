@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Plain Text Style</title>
+  <style>
+    :root {
+      --bg-color: #fcfcfc;
+      --text-color: #111111;
+      --border-color: #cccccc;
+      --font-stack: "Courier New", Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-stack);
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .resume-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+    }
+
+    .contact-info a {
+      color: var(--text-color);
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--text-color);
+      padding-bottom: 0.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .item {
+      margin-bottom: 1.5rem;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      flex-wrap: wrap;
+    }
+
+    .item-subheader {
+      display: flex;
+      justify-content: space-between;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 1rem;
+    }
+
+    ul li {
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+
+    ul li::before {
+      content: "- ";
+      position: absolute;
+      left: -1rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1rem;
+    }
+
+    .skills-label {
+      font-weight: bold;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: none;
+      }
+      .resume-container {
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .item-header, .item-subheader {
+        flex-direction: column;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="resume-container">
+    <header>
+      <h1>Alex Morgan</h1>
+      <div class="contact-info">
+        <span>San Francisco, CA</span> | 
+        <span>(555) 019-2834</span> | 
+        <a href="mailto:alex.morgan@email.com">alex.morgan@email.com</a> | 
+        <a href="https://linkedin.com">linkedin.com/in/alexmorgan</a>
+      </div>
+    </header>
+
+    <section id="summary">
+      <h2>// Professional Summary</h2>
+      <p>
+        Detail-oriented Software Engineer with over 6 years of experience building scalable web applications and distributed systems. Proficient in JavaScript/TypeScript, Python, and cloud architecture. Dedicated to writing clean, maintainable code and optimizing system performance.
+      </p>
+    </section>
+
+    <section id="experience">
+      <h2>// Experience</h2>
+      
+      <div class="item">
+        <div class="item-header">
+          <span>Senior Software Engineer</span>
+          <span>2021 - Present</span>
+        </div>
+        <div class="item-subheader">
+          <span>TechCorp Solutions</span>
+          <span>San Francisco, CA</span>
+        </div>
+        <ul>
+          <li>Led a team of 5 engineers in redesigning the core API service, improving response times by 35%.</li>
+          <li>Architected and deployed microservices using Node.js, Docker, and AWS ECS.</li>
+          <li>Mentored junior developers and established CI/CD best practices across the engineering department.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span>Software Engineer</span>
+          <span>2018 - 2021</span>
+        </div>
+        <div class="item-subheader">
+          <span>DataFlow Systems</span>
+          <span>Austin, TX</span>
+        </div>
+        <ul>
+          <li>Developed interactive dashboard UI using React, Redux, and D3.js for real-time analytics.</li>
+          <li>Engineered RESTful endpoints in Python/Django to process large-scale dataset queries.</li>
+          <li>Reduced database query latency by 50% through strategic indexing and caching strategies.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>// Education</h2>
+      <div class="item">
+        <div class="item-header">
+          <span>B.S. in Computer Science</span>
+          <span>2014 - 2018</span>
+        </div>
+        <div class="item-subheader">
+          <span>University of California, Berkeley</span>
+          <span>Berkeley, CA</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>// Technical Skills</h2>
+      <div class="skills-grid">
+        <span class="skills-label">Languages:</span>
+        <span>JavaScript (ES6+), TypeScript, Python, HTML5, CSS3, SQL</span>
+        
+        <span class="skills-label">Frameworks:</span>
+        <span>React, Node.js, Express, Django, Next.js</span>
+        
+        <span class="skills-label">Tools & Cloud:</span>
+        <span>Git, Docker, AWS (S3, EC2, ECS), PostgreSQL, Redis, Jest</span>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

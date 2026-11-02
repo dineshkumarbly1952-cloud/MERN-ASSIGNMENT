@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>39 - CSS Grid Header, Sidebar & Product Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #151c2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #10b981;
+            --border: #243049;
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        /* --- SHOP LAYOUT USING CSS GRID --- */
+        .shop-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-template-rows: 80px 1fr;
+            grid-template-areas:
+                "sidebar header"
+                "sidebar catalog";
+            gap: 24px;
+            min-height: 90vh;
+        }
+
+        .box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 1. Sidebar Filters Area */
+        .sidebar {
+            grid-area: sidebar;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #818cf8, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .filter-group h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .filter-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-item a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .filter-item a:hover, .filter-item a.active {
+            color: var(--text-main);
+        }
+
+        /* 2. Header Area */
+        .header {
+            grid-area: header;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: var(--text-main);
+            width: 320px;
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .cart-btn {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* 3. Catalog / Product Grid Area */
+        .catalog {
+            grid-area: catalog;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 14px;
+        }
+
+        .product-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 900px) {
+            .shop-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                grid-template-areas:
+                    "header"
+                    "sidebar"
+                    "catalog";
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CSS Grid Shop Layout -->
+    <div class="shop-layout">
+
+        <!-- Sidebar Filters -->
+        <aside class="box sidebar">
+            <div class="brand">
+                <span>⚡</span> GridShop
+            </div>
+            
+            <div class="filter-group">
+                <h3>Categories</h3>
+                <ul class="filter-list">
+                    <li class="filter-item"><a href="#" class="active">All Products</a></li>
+                    <li class="filter-item"><a href="#">Audio & Sound</a></li>
+                    <li class="filter-item"><a href="#">Wearables</a></li>
+                    <li class="filter-item"><a href="#">Peripherals</a></li>
+                    <li class="filter-item"><a href="#">Accessories</a></li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>Price Range</h3>
+                <ul class="filter-list">
+                    <li class="filter-item"><a href="#">Under $50</a></li>
+                    <li class="filter-item"><a href="#">$50 - $150</a></li>
+                    <li class="filter-item"><a href="#">$150 & Above</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Header Area -->
+        <header class="box header">
+            <input type="text" class="search-box" placeholder="Search gear, hardware...">
+            <div class="header-actions">
+                <button class="cart-btn">🛒 Cart (3)</button>
+                <div style="font-weight: 700; font-size: 0.9rem;">Rishabh G.</div>
+            </div>
+        </header>
+
+        <!-- Product Catalog Area -->
+        <main class="box catalog">
+            <div class="catalog-header">
+                <h2 style="font-size: 1.25rem; font-weight: 700;">Featured Products</h2>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Showing 6 items</span>
+            </div>
+
+            <div class="product-grid">
+                <!-- Item 1 -->
+                <div class="product-card">
+                    <div>
+                        <div class="product-img">🎧</div>
+                        <h3 class="product-title">Studio Headphones</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Active noise cancellation.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">$199.99</span>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="product-card">
+                    <div>
+                        <div class="product-img">⌚</div>
+                        <h3 class="product-title">Smartwatch Ultra</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Biometric health tracking.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">$249.99</span>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="product-card">
+                    <div>
+                        <div class="product-img">💻</div>
+                        <h3 class="product-title">Mechanical Keyboard</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Hot-swappable switches.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">$129.99</span>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="product-card">
+                    <div>
+                        <div class="product-img">📷</div>
+                        <h3 class="product-title">4K Action Camera</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Waterproof stabilization.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">$299.99</span>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="product-card">
+                    <div>
+                        <div class="product-img">🖱️</div>
+                        <h3 class="product-title">Wireless Mouse</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">High precision optical.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">$59.99</span>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="product-card">
+                    <div>
+                        <div class="product-img">💡</div>
+                        <h3 class="product-title">Desk Light Bar</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Adjustable color temp.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">$79.99</span>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>

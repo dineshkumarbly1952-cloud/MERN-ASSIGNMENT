@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Landing Page Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --border: #334155;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 60px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- LANDING SECTION HEADER --- */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #818cf8, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* --- FLEXBOX FEATURES GRID CONTAINER --- */
+        .features-flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            flex: 1 1 340px;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary);
+        }
+
+        .feature-icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .feature-link {
+            color: #818cf8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .feature-link:hover {
+            gap: 10px;
+            color: #a5b4fc;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .feature-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Landing Section Header -->
+        <div class="section-header">
+            <span class="section-badge">Core Capabilities</span>
+            <h2>Designed for Scalability & High Performance</h2>
+            <p>Explore how our flexible layout structures and modern CSS properties empower you to craft stunning landing page sections with complete responsiveness.</p>
+        </div>
+
+        <!-- Flexbox Features Container -->
+        <div class="features-flex-container">
+
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-box">⚡</div>
+                    <h3 class="feature-title">Lightning Fast Layouts</h3>
+                    <p class="feature-desc">Engineered purely with lightweight CSS Flexbox properties to ensure maximum rendering speed and performance.</p>
+                </div>
+                <a href="#" class="feature-link">Learn more &rarr;</a>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-box">🛡️</div>
+                    <h3 class="feature-title">Robust Architecture</h3>
+                    <p class="feature-desc">Build resilient UI blocks that adapt smoothly across mobile devices, tablets, and desktop screen boundaries.</p>
+                </div>
+                <a href="#" class="feature-link">Learn more &rarr;</a>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-box">🎨</div>
+                    <h3 class="feature-title">Customizable Design</h3>
+                    <p class="feature-desc">Easily customize color themes, spacing metrics, and border radiuses using centralized CSS custom variables.</p>
+                </div>
+                <a href="#" class="feature-link">Learn more &rarr;</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

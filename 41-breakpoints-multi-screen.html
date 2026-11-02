@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>41 - Responsive Design & Multi-Screen Breakpoints</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #151c2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-pink: #ec4899;
+            --border: #243049;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- BREAKPOINT VISUALIZER BAR --- */
+        .screen-indicator {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .indicator-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .current-screen {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        /* --- RESPONSIVE CARDS CONTAINER --- */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .break-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .break-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .break-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .break-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* --- MULTI-SCREEN MEDIA QUERIES --- */
+
+        /* Tablet Breakpoint (max-width: 1024px) -> 2 columns */
+        @media (max-width: 1024px) {
+            .grid-layout {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile Breakpoint (max-width: 640px) -> 1 column */
+        @media (max-width: 640px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>41. Multi-Screen Breakpoints</h1>
+            <p>Mastering media queries for responsive layouts across desktop, tablet, and mobile displays.</p>
+        </header>
+
+        <!-- Dynamic Screen Indicator -->
+        <div class="screen-indicator">
+            <span class="indicator-label">Active Media Query Range</span>
+            <div class="current-screen" id="screenSizeText">Auto-Detecting Viewport...</div>
+        </div>
+
+        <!-- Responsive Card Grid -->
+        <div class="grid-layout">
+            <div class="break-card">
+                <span class="card-tag">Desktop & Tablet</span>
+                <h3>1. Fluid Layouts</h3>
+                <p>Designed to scale smoothly across wide displays using flexible grid tracks and percentage metrics.</p>
+            </div>
+
+            <div class="break-card">
+                <span class="card-tag">Multi-Screen</span>
+                <h3>2. Media Queries</h3>
+                <p>Applying specific CSS rules at precise viewport width thresholds (1024px and 640px).</p>
+            </div>
+
+            <div class="break-card">
+                <span class="card-tag">Adaptability</span>
+                <h3>3. Mobile First</h3>
+                <p>Structuring core component styles to prioritize readability and touch accessibility on small screens.</p>
+            </div>
+
+            <div class="break-card">
+                <span class="card-tag">Performance</span>
+                <h3>4. Scalable Units</h3>
+                <p>Utilizing relative sizing like <code>rem</code>, <code>vw</code>, and CSS Grid fractions for clean scaling.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateScreenSize() {
+            const width = window.innerWidth;
+            const textEl = document.getElementById('screenSizeText');
+            if (width <= 640) {
+                textEl.innerText = `Mobile View (≤ 640px)`;
+            } else if (width <= 1024) {
+                textEl.innerText = `Tablet View (641px - 1024px)`;
+            } else {
+                textEl.innerText = `Desktop View (> 1024px)`;
+            }
+        }
+        window.addEventListener('resize', updateScreenSize);
+        window.addEventListener('DOMContentLoaded', updateScreenSize);
+    </script>
+
+</body>
+</html>

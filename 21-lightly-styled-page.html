@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Lightly Styled Page | Clean & Minimalist Design</title>
+  <meta name="description" content="A clean, minimalist HTML document featuring subtle typography, uncluttered layout grids, and restrained styling.">
+  <meta name="keywords" content="minimalist design, lightly styled, typography, clean HTML, responsive layout">
+  <meta name="author" content="Alex Morgan">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Lightly Styled Page | Clean & Minimalist Design">
+  <meta property="og:description" content="Explore a minimalist, content-first web page designed with subtle aesthetics and high readability.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --muted-text: #666666;
+      --border-color: #e5e5e5;
+      --accent-color: #0066cc;
+      --card-bg: #fafafa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Minimal Header */
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(255, 255, 255, 0.98);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav.navbar {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1rem;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted-text);
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--accent-color);
+    }
+
+    /* Main Content Container */
+    main.container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    article {
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--muted-text);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.2px;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: #333333;
+    }
+
+    /* Lightly Styled Callout Box */
+    .callout {
+      background-color: var(--card-bg);
+      border-left: 3px solid var(--text-color);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      color: #444444;
+    }
+
+    /* Minimalist List */
+    ul.feature-list {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    ul.feature-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    ul.feature-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted-text);
+    }
+
+    /* Minimal Footer */
+    footer.site-footer {
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.85rem;
+      color: var(--muted-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer.site-footer a {
+      color: var(--muted-text);
+      text-decoration: underline;
+    }
+
+    footer.site-footer a:hover {
+      color: var(--text-color);
+    }
+
+    @media (max-width: 600px) {
+      main.container {
+        padding: 2rem 1rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      footer.site-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimal Header -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main Site Navigation">
+      <a href="21-lightly-styled-page.html" class="nav-brand">Minimalist View</a>
+      <ul class="nav-links">
+        <li><a href="20-multipage-project.html">Portal Home</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    
+    <article>
+      <header>
+        <h1>Lightly Styled Pages</h1>
+        <p class="subtitle">Exploring the beauty of restrained design, high legibility, and uncluttered HTML layouts.</p>
+      </header>
+
+      <section id="overview">
+        <h2>The Core Principle</h2>
+        <p>
+          In a digital landscape often crowded with heavy frameworks, intricate animations, and dense UI components, lightly styled pages offer a refreshing return to fundamentals. By prioritizing raw typography, generous whitespace, and minimal color palettes, web documents become faster, cleaner, and deeply accessible.
+        </p>
+        
+        <div class="callout">
+          "Simplicity is about subtracting the obvious and adding the meaningful." — Lightly styled architecture relies on letting content speak for itself without visual distraction.
+        </div>
+      </section>
+
+      <section id="philosophy">
+        <h2>Key Design Characteristics</h2>
+        <p>
+          Creating an effective minimalist page requires careful attention to structural hierarchy and typographic proportions rather than decorative elements:
+        </p>
+
+        <ul class="feature-list">
+          <li><strong>Restrained Color Palette:</strong> Neutral tones with a single, purposeful accent hue for interactive links.</li>
+          <li><strong>Fluid Readability:</strong> Controlled line widths (max-width constraints) and optimized line-height ratios for effortless reading.</li>
+          <li><strong>Semantic Markup:</strong> Clean HTML5 tags that ensure screen reader compatibility and robust SEO structure.</li>
+          <li><strong>Zero Bloat:</strong> Lightweight CSS files that load instantly across all devices and connection speeds.</li>
+        </ul>
+      </section>
+
+      <section id="conclusion">
+        <h2>Moving Forward</h2>
+        <p>
+          Whether drafting technical documentation, personal essays, or structural wireframes, adopting a light styling approach ensures that your content remains front and center.
+        </p>
+      </section>
+    </article>
+
+  </main>
+
+  <!-- Minimal Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Lightly Styled Project.</p>
+    <p><a href="20-multipage-project.html">Return to Portal Index</a></p>
+  </footer>
+
+</body>
+</html>
